@@ -12,6 +12,8 @@ public interface Algorithm {
 
     void setDim(int dim);
 
+    int getDim();
+
     String getName();
 
 }

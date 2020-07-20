@@ -19,7 +19,6 @@ public class POM implements Algorithm, StatusListener {
 
     private @Getter @Setter double jumpRate;
     private @Getter @Setter double referenceFactor;
-    private Benchmark benchmark;
 
     public POM(final Algorithm algorithm, final double jumpRate, final double referenceFactor) {
         this.algorithm = algorithm;
@@ -111,6 +110,11 @@ public class POM implements Algorithm, StatusListener {
         par_opp.add(ref);
 
         return par_opp;
+    }
+
+    @Override
+    public int getDim() {
+        return algorithm.getDim();
     }
 
     @Override

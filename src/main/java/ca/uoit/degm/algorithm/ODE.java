@@ -60,6 +60,11 @@ public class ODE implements Algorithm, StatusListener {
     }
 
     @Override
+    public int getDim() {
+        return algorithm.getDim();
+    }
+
+    @Override
     public void onFinish(final List<Chromosome> population, final double bestFitness) {
 
     }

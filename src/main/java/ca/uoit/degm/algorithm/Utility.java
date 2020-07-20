@@ -150,23 +150,6 @@ public class Utility {
         return maximums;
     }
 
-    public static double opposite(List<List<Double>> population, double value, int dim) {
-        double min = Double.POSITIVE_INFINITY;
-        double max = Double.NEGATIVE_INFINITY;
-        double total = 0;
-
-        for (List<Double> chromosome : population) {
-//            total += chromosome.get(dim);
-            if (chromosome.get(dim) < min) {
-                min = chromosome.get(dim);
-            } else if (chromosome.get(dim) > max) {
-                max = chromosome.get(dim);
-            }
-        }
-
-        return min + max - value;
-    }
-
     public static List<Double> add(final List<Double> v1, final List<Double> v2) {
         if (v1.size() != v2.size())
             throw new IllegalArgumentException("Vector sizes are not equal");
