@@ -1,9 +1,6 @@
 package ca.uoit.degm.algorithm;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
+import java.util.*;
 
 public class Utility {
 
@@ -54,14 +51,14 @@ public class Utility {
         return genes;
     }
 
-    public static int getLowestEuclideanDistance(final List<Chromosome> chromosomes, final int d, final int gene) {
+    public static int getMedianGene(final List<Chromosome> chromosomes, final int gene) {
         final List<Double> nthGenes = getNthGenes(chromosomes, gene);
         final double[] distances = new double[chromosomes.size()];
         double min = Double.MAX_VALUE;
         int minIdx = 0;
 
         for (int i = 0; i < chromosomes.size(); i++) {
-            distances[i] = getEuclideanDistance(chromosomes.get(i).get(gene), nthGenes);
+            distances[i] = getSumOfDistances(chromosomes.get(i).get(gene), nthGenes);
         }
 
         for (int i = 0; i < distances.length; i++) {
@@ -74,14 +71,41 @@ public class Utility {
         return minIdx;
     }
 
-    public static double getEuclideanDistance(final double gene, final List<Double> correspondingGenes) {
+    public static double getSumOfDistances(final double gene, final List<Double> correspondingGenes) {
         double total = 0;
 
         for (int i = 0; i < correspondingGenes.size(); i++) {
-            total += Math.pow(gene - correspondingGenes.get(i), 2);
+            total += Math.abs(gene - correspondingGenes.get(i));
         }
 
-        return Math.sqrt(total);
+        return total;
+    }
+
+    public static int getClosestToMean(final List<Chromosome> chromosomes, final int gene) {
+        final double[] distances = new double[chromosomes.size()];
+        double min = Double.MAX_VALUE;
+        int minIdx = 0;
+
+        double total = 0;
+
+        for (int i = 0; i < chromosomes.size(); i++) {
+            total += chromosomes.get(i).get(gene);
+        }
+
+        double average = total / chromosomes.size();
+
+        for (int i = 0; i < chromosomes.size(); i++) {
+            distances[i] = Math.abs(chromosomes.get(i).get(gene) - average);
+        }
+
+        for (int i = 0; i < distances.length; i++) {
+            if (distances[i] < min) {
+                min = distances[i];
+                minIdx = i;
+            }
+        }
+
+        return minIdx;
     }
 
     public static List<Double> oppositeCopy(final List<Double> v, final double min, final double max) {

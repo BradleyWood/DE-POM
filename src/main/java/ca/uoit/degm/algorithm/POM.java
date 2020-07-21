@@ -65,7 +65,7 @@ public class POM implements Algorithm, StatusListener {
         final int[] bestIndices = new int[dim];
 
         for (int i = 0; i < dim; i++) {
-            bestIndices[i] = getLowestEuclideanDistance(topChromosomes, dim, i);
+            bestIndices[i] = getClosestToMean(topChromosomes, i);
         }
 
         Chromosome ref = new Chromosome(dim);
